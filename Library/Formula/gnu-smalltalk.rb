@@ -22,6 +22,7 @@ class GnuSmalltalk < Formula
 
   option "with-tests", "Verify the build with make check (this may hang)"
   option "with-tcltk", "Build the Tcl/Tk module that requires X11"
+  option "x11", "Explicitly depend on X11 (allows building Cairo support)"
 
   deprecated_option "tests" => "with-tests"
   deprecated_option "tcltk" => "with-tcltk"
@@ -36,7 +37,7 @@ class GnuSmalltalk < Formula
   depends_on "libffi" => :recommended
   depends_on "libsigsegv" => :recommended
   depends_on "glew" => :optional
-  depends_on :x11 if build.with? "tcltk"
+  depends_on :x11 if build.with? "tcltk" or build.with? "x11"
 
   fails_with :llvm do
     build 2334
